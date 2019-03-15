@@ -18,6 +18,21 @@
   puts "例#{t}の答え"
   File.open("data00#{t}.txt", "r"){ |f|
     # ここにプログラムを記述してください。
+    l = f.gets.to_i  #人数
+    m = f.gets.split  #人の名前の配列 
+    n = f.gets.to_i  #購入回数
+    
+
+    r = {}  #空のハッシュ
+    l.times do |d|
+      r[m[d]] = 0  #キーを人の名前として全員に数値0を与える(※1)
+    end
+
+    n.times do |d|  
+      q = f.gets.split  #人、合計金額の順の配列をn回、getsを繰り返す
+      r[q[0]] += q[1].to_i  #(※1)で得た数値0(キーが人)に横の要素を数値として足していく。という処理をn回繰り返す。
+    end
+    p r.sort_by{ | k, v | v }.reverse.to_h  
   }
 end
 
